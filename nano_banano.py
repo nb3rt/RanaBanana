@@ -7,7 +7,7 @@ from io import BytesIO
 from PIL import Image
 import torch
 import numpy as np
-from utilities import ColoredLogger
+from .utilities import ColoredLogger
 
 logger = ColoredLogger("RANO-BANANO")
 
