@@ -318,7 +318,7 @@ class ComfyUI_RanoBanano:
             generation_config = types.GenerateContentConfig(
                 temperature=temperature,
                 response_modalities=['Text', 'Image'],
-                image_config=types.ImageGenerationConfig(
+                image_config=types.ImageConfig(
                     aspect_ratio=aspect_ratio,
                 ),
             )
