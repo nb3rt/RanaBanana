@@ -1,11 +1,20 @@
-# ComfyUI-NanoBanano
+# RanaBanana
 
-A ComfyUI custom node for Google's **Gemini 2.5 Flash Image** (aka "Nano Banana") model - the state-of-the-art image generation and editing AI.
+A ComfyUI custom node for Google's **Gemini** image generation models — supporting text-to-image, editing, style transfer, and object insertion.
+
+> **Fork notice**: This project is a fork of [ComfyUI-NanoBanano](https://github.com/ShmuelRonen/ComfyUI-NanoBanano) by [ShmuelRonen](https://github.com/ShmuelRonen). Original work is licensed under MIT.
+
+## What changed in this fork
+
+- **Renamed** to **RanaBanana** (node, category, and display name)
+- **Added detailed diagnostic logging** using `ColoredLogger` — every step of the pipeline (API key resolution, image encoding, prompt building, API request/response, tensor conversion) is logged to the ComfyUI console with color-coded severity levels, timings, and full tracebacks on errors
+- **Multi-model support** — added `gemini-3-pro-image-preview` and `gemini-3.1-flash-image-preview` alongside the original `gemini-2.5-flash-image`
+- **Branding** — Publicis Groupe Poland Technology ([SharePoint](https://publicisgroupe.sharepoint.com/sites/TechnologyPoland/))
 
 ## Features
 
 - **Multi-Modal Operations**: Generate, edit, style transfer, and object insertion
-- **Up to 5 Reference Images**: Support for complex multi-image operations  
+- **Up to 5 Reference Images**: Support for complex multi-image operations
 - **Character Consistency**: Maintain identity across edits and generations
 - **Batch Processing**: Generate up to 4 images per request
 - **Quality Control**: Temperature and quality settings
@@ -25,14 +34,14 @@ A ComfyUI custom node for Google's **Gemini 2.5 Flash Image** (aka "Nano Banana"
 
 ## Installation
 
-### Method 1: Git Clone (Recommended)
-
 ```bash
 cd ComfyUI/custom_nodes/
-git clone https://github.com/ShmuelRonen/ComfyUI-NanoBanano.git
-cd ComfyUI-NanoBanano
+git clone https://github.com/nb3rt/RanaBanana.git
+cd RanaBanana
 pip install -r requirements.txt
 ```
+
+Restart ComfyUI after installation.
 
 ## API Key Setup
 
@@ -49,23 +58,24 @@ pip install -r requirements.txt
 export GEMINI_API_KEY="your_api_key_here"
 ```
 
-**Or enter directly in the node's api_key field**
+**Or enter directly in the node's `api_key` field.**
 
 ## Usage
 
-1. **Find the Node**: Search "Nano Banana" in ComfyUI
+1. **Find the Node**: Search **"RanaBanana"** in ComfyUI's node menu
 2. **Select Operation**:
    - **Generate**: Create new images from text
-   - **Edit**: Modify existing images 
+   - **Edit**: Modify existing images
    - **Style Transfer**: Apply styles from references
    - **Object Insertion**: Add elements to scenes
 
 3. **Key Parameters**:
    - `prompt`: Describe what you want
+   - `model`: Choose Gemini model (`gemini-2.5-flash-image`, `gemini-3-pro-image-preview`, `gemini-3.1-flash-image-preview`)
    - `reference_image_1-5`: Upload reference images
-   - `temperature`: Creativity (0.0-1.0)
-   - `batch_count`: Images per run (1-4)
-   - `aspect_ratio`: Only affects generation, not editing
+   - `temperature`: Creativity (0.0–1.0)
+   - `batch_count`: Images per run (1–4)
+   - `aspect_ratio`: Output format (1:1, 16:9, 9:16, 4:3, 3:4)
 
 ## Examples
 
@@ -78,7 +88,7 @@ Aspect Ratio: 16:9
 
 ### Image Editing
 ```
-Operation: edit  
+Operation: edit
 Reference Image: [Your photo]
 Prompt: "Add falling snow and winter atmosphere"
 ```
@@ -91,20 +101,16 @@ Reference Image 2: [Style reference]
 Prompt: "Apply watercolor painting style"
 ```
 
-## Important Limitations
-
-- **Output Resolution**: API limits to ~1024px max dimension
-- **Cost**: ~$0.039 per image generated
-- **API Access**: Requires paid Gemini subscription
-- **Rate Limits**: Vary by subscription tier
-
 ## Troubleshooting
+
+Check the **ComfyUI console/terminal** — RanaBanana logs every step with color-coded messages (`[RANO-BANANO|INFO]`, `[RANO-BANANO|ERROR]`, etc.).
 
 **"API key not valid"**
 - Ensure billing is enabled in Google Cloud Console
 - Free tier cannot access image generation models
 
 **"No images found in response"**
+- Check console logs for `safety_ratings` and `finish_reason` — the request may be filtered
 - Try more explicit prompts: "Generate an image of..."
 - Check API rate limits and billing status
 
@@ -116,27 +122,18 @@ pip install google-generativeai pillow torch numpy requests
 ## Cost Information
 
 - **Per Image**: ~$0.039 USD
-- **Batch of 4**: ~$0.156 USD  
+- **Batch of 4**: ~$0.156 USD
 - Node displays cost estimates automatically
-
-## Contributing
-
-1. Fork this repository
-2. Create feature branch (`git checkout -b feature/name`)
-3. Commit changes (`git commit -m 'Add feature'`)
-4. Push branch (`git push origin feature/name`)
-5. Open Pull Request
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+MIT License — see [LICENSE](LICENSE) file for details.
 
-## Support
+## Credits
 
-- **Issues**: [GitHub Issues](https://github.com/ShmuelRonen/ComfyUI-NanoBanano/issues)
-- **ComfyUI Community**: Discord #custom-nodes channel
+- **Original author**: [ShmuelRonen](https://github.com/ShmuelRonen) — [ComfyUI-NanoBanano](https://github.com/ShmuelRonen/ComfyUI-NanoBanano)
+- **Fork maintainer**: [nb3rt](https://github.com/nb3rt) / [Publicis Groupe Poland Technology](https://publicisgroupe.sharepoint.com/sites/TechnologyPoland/)
 
 ---
 
-**Note**: Unofficial implementation. Google and Gemini are trademarks of Google LLC. Repository Structure
-
+**Note**: Unofficial implementation. Google and Gemini are trademarks of Google LLC.
