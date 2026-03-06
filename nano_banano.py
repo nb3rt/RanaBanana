@@ -38,9 +38,9 @@ def save_config(config):
         json.dump(config, f, indent=4)
     logger.info("Config saved successfully")
 
-class ComfyUI_RanoBanano:
+class ComfyUI_RanaBanana:
     def __init__(self, api_key=None):
-        logger.info("=== Initializing ComfyUI_RanoBanano node ===")
+        logger.info("=== Initializing ComfyUI_RanaBanana node ===")
         env_key = os.environ.get("GEMINI_API_KEY")
 
         # Common placeholder values to ignore
@@ -154,8 +154,8 @@ class ComfyUI_RanoBanano:
     RETURN_TYPES = ("IMAGE", "STRING")
     RETURN_NAMES = ("generated_images", "operation_log")
     FUNCTION = "rano_banano_generate"
-    CATEGORY = "Rano Banano"
-    DESCRIPTION = "Generate and edit images using Google Gemini image generation models. Requires paid API access."
+    CATEGORY = "RanaBanana"
+    DESCRIPTION = "Generate and edit images using Google Gemini image generation models. Requires paid API access. | Publicis Groupe Poland Technology: https://publicisgroupe.sharepoint.com/sites/TechnologyPoland/"
 
     def tensor_to_image(self, tensor):
         """Convert tensor to PIL Image"""
@@ -605,9 +605,9 @@ class ComfyUI_RanoBanano:
 
 # Node registration
 NODE_CLASS_MAPPINGS = {
-    "ComfyUI_RanoBanano": ComfyUI_RanoBanano,
+    "ComfyUI_RanaBanana": ComfyUI_RanaBanana,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "ComfyUI_RanoBanano": "Rano Banano (Gemini Image)",
+    "ComfyUI_RanaBanana": "RanaBanana (Gemini Image)",
 }
